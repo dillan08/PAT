@@ -20,4 +20,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^oats/', include('manejadorOATs.urls')),
     url(r'^cursos/', include('manejadorCursos.urls')),
+    url(r'^actividades/', include('manejadorActividades.urls')),
+    url(r'^usuarios/', include('manejadorUsuarios.urls')),
 ]
