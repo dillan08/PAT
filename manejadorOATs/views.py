@@ -2,10 +2,21 @@ from nucleo.models import OAT
 from manejadorOATs.serializers import OATSerializer
 from django.http import Http404
 from rest_framework.views import APIView
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 
-# Create your views here.
+
+class OATsViewSet(viewsets.ModelViewSet):
+    serializer_class = OATSerializer
+    queryset = OAT.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
 class OATList(APIView):
     def get(self, request, format=None):
@@ -22,6 +33,7 @@ class OATList(APIView):
 
 
 class OATDetail(APIView):
+
     def get_objects(self, pk):
         try:
             return OAT.objects.get(pk=pk)
@@ -34,11 +46,11 @@ class OATDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        oat = self.get_object(pk)
-        serializer = OATSerializer(oat, data=request.data)
+        oat = self.get_objects(pk)
+        serializer = OATSerializer(oat, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):

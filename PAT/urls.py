@@ -16,10 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+
 urlpatterns = [
+
     url(r'^admin/', admin.site.urls),
-    url(r'^oats/', include('manejadorOATs.urls')),
-    url(r'^cursos/', include('manejadorCursos.urls')),
-    url(r'^actividades/', include('manejadorActividades.urls')),
-    url(r'^usuarios/', include('manejadorUsuarios.urls')),
+    url(r'^api-auth/', include('rest_framework.urls',
+                              namespace='rest_framework')),
+    url(r'^', include('manejadorOATs.urls')),
+    url(r'^', include('manejadorCursos.urls')),
+    url(r'^', include('manejadorActividades.urls')),
+    url(r'^', include('manejadorUsuarios.urls')),
 ]
