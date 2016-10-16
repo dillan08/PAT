@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import User
 
 class PerfilUsuario(models.Model):
@@ -22,7 +23,7 @@ class Grupo(models.Model):
 
 class Actividad(models.Model):
     descActividad = models.CharField(max_length=45)
-    fechActividad = models.DateTimeField(auto_created=True)
+    fechActividad = models.DateTimeField(auto_now_add=True)
     textActividad = models.CharField(max_length=2000)
     nomActividad = models.CharField(max_length=45)
 

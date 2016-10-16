@@ -1,0 +1,10 @@
+Se agrego la funcionalidad de agregar usuarios al sistema
+Estructura para agregar usuarios al sistema (Temporal)
+{
+	"username":"TEST",
+	"email":"TEST@mail.com",
+	"password":"TEST",
+	"perfil":{
+		"nivelEstudios":"TEST"
+	}
+}
