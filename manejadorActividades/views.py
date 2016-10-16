@@ -33,14 +33,24 @@ class ActividadDetail(APIView):
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
-        actividad = self.get_object(pk)
+        actividad = self.get_objects(pk=pk)
         serializer = actividadesSerializer(actividad, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         curso = self.get_object(pk)
         curso.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+#    def update(self, request, *args, **kwargs):
+#        data = request.DATA
+#        actividad = self.get_objects(data.pk)
+#        serializer = actividadesSerializer(actividad, data=data, partial=True)
+
+#        if serializer.is_valid():
+#            serializer.save()
+#            return Response(serializer.data, status.HTTP_201_CREATED)
+#        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
