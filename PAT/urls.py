@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^', include('manejadorCursos.urls')),
     url(r'^', include('manejadorActividades.urls')),
     url(r'^', include('manejadorUsuarios.urls')),
+    url(r'^', include('interesesCRUD.urls')),
+    url(r'^', include('manejadorComentarios.urls')),
 ]

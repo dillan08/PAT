@@ -18,7 +18,7 @@ class UsuarioSerializer(serializers.Serializer):
         fields = (
             'username',
             'email',
-            "password",
+            'password',
             'role'
         )
 

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'manejadorUsuarios.apps.ManejadorusuariosConfig',
     'manejadorCursos.apps.ManejadorcursosConfig',
     'manejadorActividades.apps.ManejadoractividadesConfig',
+    'interesesCRUD.apps.InteresescrudConfig',
+    'manejadorComentarios.apps.ManejadorcomentariosConfig',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10,
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'nucleo.permissions.IsOwnerOrReadOnly'
+    )
+}

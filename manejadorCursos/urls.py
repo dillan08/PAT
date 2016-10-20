@@ -7,8 +7,8 @@ from rest_framework import routers
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'gestionCursos', CursoViewSet, 'gestionCursos')
 urlpatterns = [
-    url(r'^$', views.CursosList.as_view()),
-    url(r'^(?P<pk>[0-9]+)/$', views.CursoDetail.as_view()),
+    # url(r'^$', views.CursosList.as_view()),
+    # url(r'^(?P<pk>[0-9]+)/$', views.CursoDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)

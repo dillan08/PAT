@@ -1,28 +1,24 @@
 from rest_framework import serializers
 from nucleo.models import Actividad
-
+from manejadorCursos.serializers import cursoSerializer
+# calificacion = models.IntegerField(default=0)
+# tipo = models.CharField(max_length=2, choices=ACTIVIDAD_CHOICES)
+# cursos = models.ManyToManyField(Curso)
 
 class actividadesSerializer(serializers.ModelSerializer):
-    fechActividad = serializers.DateTimeField(required=False)
-
+    #cursos = cursoSerializer(read_only=True, many=True, required=False)
+    #cursos = cursoSerializer(many=True)
     class Meta:
         model = Actividad
-        fields = (
-            'pk',
-            'descActividad',
-            'fechActividad',
-            'textActividad',
-            'nomActividad',
-        )
+        fields = '__all__'
 
     def create(self, validated_data):
         return Actividad.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.descActividad = validated_data.get('descActividad', instance.descActividad)
-        instance.fechActividad = validated_data.get('fechActividad', instance.fechActividad)
-        instance.textActividad = validated_data.get('textActividad', instance.textActividad)
-        instance.nomActividad = validated_data.get('nomActividad', instance.nomActividad)
+        instance.calificacion = validated_data.get('calificacion', instance.calificacion)
+        instance.tipo = validated_data.get('tipo', instance.tipo)
+        instance.cursos = validated_data.get('cursos', instance.cursos)
         instance.save()
         return instance
 
